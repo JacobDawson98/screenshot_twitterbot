@@ -14,6 +14,7 @@ def frame_cap():
     while not cap_successful:
         cap_successful, image = vidcap.read()
     cv2.imwrite(path.abspath(path.join(public_dir, 'screens', 'frame{}.jpg'.format(rand_frame))), image)
+    return 'frame{}.jpg'.format(rand_frame)
 
 
-frame_cap()
+print(frame_cap())
