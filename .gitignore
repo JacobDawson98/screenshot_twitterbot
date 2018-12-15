@@ -1,2 +1,4 @@
 .env
 *.pyc
+public/*
+.DS_Store
