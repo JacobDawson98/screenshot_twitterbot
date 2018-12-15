@@ -16,6 +16,3 @@ def frame_cap():
     image_dir = path.abspath(path.join(public_dir, 'screens', 'frame{}.jpg'.format(rand_frame)))
     cv2.imwrite(image_dir, image)
     return image_dir
-
-
-print(frame_cap())
