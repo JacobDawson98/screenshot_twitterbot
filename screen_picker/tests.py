@@ -1,6 +1,6 @@
 import unittest
 
-from .screen_picker import ScreenPicker
+import ScreenPicker
 
 
 class TestScreenPicker(unittest.TestCase):
