@@ -17,7 +17,7 @@ def get_download_url(season, episode, index):
 
 
 # Used for interesting print statement after all screenshots are downloaded
-time_initial = datetime.now()
+time_initial = int(datetime.now().strftime('%s'))
 num_downloaded = 0
 
 num_episodes = {
@@ -33,6 +33,7 @@ episode = season = 1
 while season <= 7:
     print('Downloading season ' + str(season))
     while episode <= num_episodes[season]:
+        print('Episode: ' + str(episode))
         for index in range(1, 292):
             screens_dir = path.abspath(path.join(
                 path.dirname(__file__),
@@ -49,4 +50,5 @@ while season <= 7:
         episode += 1
     episode = 1  # start from episode one in the next season
     season += 1
-print('Total time it took to download {} screenshots was {}'.format(num_downloaded, datetime.now() - time_initial))
+time_final = int(datetime.now().strftime(('%s'))) - time_initial
+print('Total time it took to download {} screenshots was {} seconds'.format(num_downloaded, time_final))

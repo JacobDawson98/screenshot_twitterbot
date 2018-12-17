@@ -1,7 +1,14 @@
 import tweepy
 from dotenv import load_dotenv
-from os import path, environ, rename
-from screen_picker.screenpicker import get_random_image_dir
+from os import path, environ, rename, listdir
+from random import choice
+
+
+def get_random_image_dir():
+    screens_dir = path.abspath(path.join(path.dirname(__file__), '..', 'public', 'screens'))
+    random_file = choice([f for f in listdir(screens_dir) if path.isfile(path.join(screens_dir, f))])
+    return path.abspath(path.join(screens_dir, random_file))
+
 
 load_dotenv(path.abspath(path.join(path.dirname(__file__), '.env')))
 API_KEY = environ.get('API_KEY')
@@ -23,3 +30,5 @@ new_image_dir = path.abspath(
             'used',
             image_dir.rsplit('/', 1)[-1]))
 rename(image_dir, new_image_dir)
+
+
