@@ -5,7 +5,7 @@ from random import choice
 
 
 def get_random_image_dir():
-    screens_dir = path.abspath(path.join(path.dirname(__file__), '..', 'public', 'screens'))
+    screens_dir = path.abspath(path.join(path.dirname(__file__), 'public', 'screens'))
     random_file = choice([f for f in listdir(screens_dir) if path.isfile(path.join(screens_dir, f))])
     return path.abspath(path.join(screens_dir, random_file))
 
@@ -30,5 +30,3 @@ new_image_dir = path.abspath(
             'used',
             image_dir.rsplit('/', 1)[-1]))
 rename(image_dir, new_image_dir)
-
-
