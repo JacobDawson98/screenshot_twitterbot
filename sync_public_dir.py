@@ -13,8 +13,8 @@ def create_used_screens_list():
                 used_screens.write(f + '\n')
 
 
-def update_screens_dir(used_screens_list):
-    with open(used_screens_file, 'a') as used_screens:
+def update_screens_dir():
+    with open(used_screens_file) as used_screens:
         lines = [l.strip() for l in used_screens.readlines()]
         for image_name in lines:
             image_dir = path.join(screens_dir, image_name)
@@ -30,3 +30,4 @@ def update_screens_dir(used_screens_list):
 
 
 create_used_screens_list()
+# update_screens_dir()
