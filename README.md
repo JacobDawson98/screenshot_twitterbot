@@ -15,3 +15,8 @@ API_SECRET=<api secret>
 OAUTH_TOKEN=<oauth token>
 OAUTH_TOKEN_SECRET=<oauth token secret>
 ```
+
+## Cron Configuration
+```
+0 * * * * /usr/bin/python3 <path-to-projects-dir>/futurama_screens/twitterbot.py
+```
