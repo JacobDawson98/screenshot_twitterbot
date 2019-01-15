@@ -17,4 +17,4 @@ jobs:
         - stage: "test"
           name: "Download screens test"
           script:
-              - python download_screens/test_download_screens.py
+              - python -m unittest download_screens/test_download_screens.py

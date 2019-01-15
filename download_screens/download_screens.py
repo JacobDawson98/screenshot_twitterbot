@@ -16,42 +16,43 @@ def get_download_url(season, episode, frame):
     return base_url + extension
 
 
-# Used for interesting print statement after all screenshots are downloaded
-time_initial = int(datetime.now().strftime('%s'))
-num_downloaded = 0
+if __name__ == '__main__':
+    # Used for interesting print statement after all screenshots are downloaded
+    time_initial = int(datetime.now().strftime('%s'))
+    num_downloaded = 0
 
-num_episodes = {
-        1: 9,
-        2: 20,
-        3: 15,
-        4: 12,
-        5: 16,
-        6: 26,
-        7: 26
-    }
-episode = season = 1
-while season <= 7:
-    print('Downloading season ' + str(season))
-    while episode <= num_episodes[season]:
-        print('Episode: ' + str(episode))
-        for frame in range(1, 292):
-            screens_dir = path.abspath(path.join(
-                path.dirname(__file__),
-                '..',
-                'public',
-                'screens', '{}_{}_{}.jpg'.format(season, episode, frame)))
-            try:
-                url = get_download_url(season, episode, frame)
-                urlretrieve(url, screens_dir)
-                num_downloaded += 1
-            except Exception as e:
-                print(e)
-                print('Couldn\'t download from: {}'.format(url))
-        episode += 1
-    episode = 1  # start from episode one in the next season
-    season += 1
-time_final = (int(datetime.now().strftime(('%s'))) - time_initial) / 60
-if time_final > 60:
-    print('Total time it took to download {} screenshots was {} hours'.format(num_downloaded, time_final/60))
-else:
-    print('Total time it took to download {} screenshots was {} minutes'.format(num_downloaded, time_final))
+    num_episodes = {
+            1: 9,
+            2: 20,
+            3: 15,
+            4: 12,
+            5: 16,
+            6: 26,
+            7: 26
+        }
+    episode = season = 1
+    while season <= 7:
+        print('Downloading season ' + str(season))
+        while episode <= num_episodes[season]:
+            print('Episode: ' + str(episode))
+            for frame in range(1, 292):
+                screens_dir = path.abspath(path.join(
+                    path.dirname(__file__),
+                    '..',
+                    'public',
+                    'screens', '{}_{}_{}.jpg'.format(season, episode, frame)))
+                try:
+                    url = get_download_url(season, episode, frame)
+                    urlretrieve(url, screens_dir)
+                    num_downloaded += 1
+                except Exception as e:
+                    print(e)
+                    print('Couldn\'t download from: {}'.format(url))
+            episode += 1
+        episode = 1  # start from episode one in the next season
+        season += 1
+    time_final = (int(datetime.now().strftime(('%s'))) - time_initial) / 60
+    if time_final > 60:
+        print('Total time it took to download {} screenshots was {} hours'.format(num_downloaded, time_final/60))
+    else:
+        print('Total time it took to download {} screenshots was {} minutes'.format(num_downloaded, time_final))
