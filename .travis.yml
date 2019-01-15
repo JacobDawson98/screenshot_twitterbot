@@ -1,0 +1,20 @@
+branches:
+    only:
+        master
+
+stages:
+    - test
+
+language: python
+python:
+- '3.6'
+
+install:
+    - pip install -r requirements/base.txt
+
+jobs:
+    include:
+        - stage: "test"
+          name: "Download screens test"
+          script:
+              - python -m unittest download_screens/test_download_screens.py
