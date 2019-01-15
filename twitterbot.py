@@ -43,4 +43,3 @@ try:
     _append_used_screen(image_name)
 except FileNotFoundError:
     create_used_screens_list()
-    _append_used_screen(image_name)
