@@ -20,3 +20,6 @@ OAUTH_TOKEN_SECRET=<oauth token secret>
 ```
 0 * * * * /usr/bin/python3 <path-to-projects-dir>/futurama_screens/twitterbot.py
 ```
+
+### Image Naming
+  * Image names are formatted as `{season}_{episode}_{frame}`
