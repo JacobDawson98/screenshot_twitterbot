@@ -14,6 +14,7 @@ API_KEY=<api key>
 API_SECRET=<api secret>
 OAUTH_TOKEN=<oauth token>
 OAUTH_TOKEN_SECRET=<oauth token secret>
+USED_SCREENS_FILE=<path of used screens file relative to root project dir>
 ```
 
 ## Cron Configuration
