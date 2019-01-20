@@ -1,6 +1,6 @@
 import tweepy
 from dotenv import load_dotenv
-from os import path, environ, rename, listdir
+from os import path, environ, rename, listdir, getcwd
 from random import choice
 
 from sync_screens import create_used_screens_list
@@ -12,12 +12,7 @@ def get_random_image_dir():
     return path.abspath(path.join(screens_dir, random_file))
 
 
-def _append_used_screen(image_name):
-    with open('used_screens.txt', 'a') as used_screens:
-        used_screens.write(image_name + '\n')
-
-
-load_dotenv(path.abspath(path.join(path.dirname(__file__), '.env')))
+load_dotenv(path.abspath(path.join(getcwd(), '.env')))
 API_KEY = environ.get('API_KEY')
 API_SECRET = environ.get('API_SECRET')
 OAUTH_TOKEN = environ.get('OAUTH_TOKEN')
@@ -39,7 +34,8 @@ new_image_dir = path.abspath(
             image_name))
 rename(image_dir, new_image_dir)
 
-try:
-    _append_used_screen(image_name)
-except FileNotFoundError:
+if path.isfile(path.join(getcwd(), environ.get('USED_SCREENS_FILE'))):
+    with open(environ.get('USED_SCREENS_FILE'), 'a') as used_screens:
+        used_screens.write(image_name + '\n')
+else:
     create_used_screens_list()

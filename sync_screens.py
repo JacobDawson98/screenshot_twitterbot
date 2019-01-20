@@ -1,9 +1,11 @@
-from os import path, listdir, rename
+from dotenv import load_dotenv
+from os import path, listdir, rename, getcwd, environ
 
 
-screens_dir = path.abspath(path.join(path.dirname(__file__), 'public', 'screens'))
+load_dotenv(path.abspath(path.join(getcwd(), '.env')))
+screens_dir = path.abspath(path.join(getcwd(), 'public', 'screens'))
 used_dir = path.abspath(path.join(screens_dir, 'used'))
-default_file = 'used_screens.txt'
+default_file = environ.get('USED_SCREENS_FILE')
 
 
 def create_used_screens_list(used_screens_file=None):
@@ -21,13 +23,9 @@ def update_screens_dir(used_screens_file=None):
             if path.isfile(image_dir):
                 new_image_dir = path.abspath(
                         path.join(
-                            path.dirname(__file__),
+                            getcwd(),
                             'public',
                             'screens',
                             'used',
                             image_dir.rsplit('/', 1)[-1]))
                 rename(image_dir, new_image_dir)
-
-
-create_used_screens_list()
-# update_screens_dir()
