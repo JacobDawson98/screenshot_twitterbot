@@ -34,7 +34,6 @@ class ScreensManager(object):
                     rename(image_dir, new_image_dir)
 
     def get_random_image(self):
-        self.screens_dir = path.abspath(path.join(path.dirname(__file__), 'public', 'screens'))
         random_file = choice([f for f in listdir(self.screens_dir) if path.isfile(path.join(self.screens_dir, f))])
         return path.abspath(path.join(self.screens_dir, random_file))
 
