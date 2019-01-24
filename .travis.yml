@@ -11,7 +11,7 @@ python:
 - '3.6'
 
 install:
-    - pip install -r requirements/dev.txt
+    - pip install -r requirements/ci.txt
 
 jobs:
     include:
@@ -22,4 +22,7 @@ jobs:
         - stage: "test"
           name: "Unit Tests"
           script:
-              - python -m unittest discover tests
+              - nosetests tests --with-coverage
+
+after_success:
+    - codecov
