@@ -3,6 +3,7 @@ branches:
         master
 
 stages:
+    - lint
     - test
 
 language: python
@@ -15,10 +16,10 @@ install:
 jobs:
     include:
         - stage: "lint"
-          name: "flake8 linting check"
+          name: "flake8"
           script:
               - flake8 .
         - stage: "test"
-          name: "Download and Sync screens test"
+          name: "Unit Tests"
           script:
               - python -m unittest discover tests

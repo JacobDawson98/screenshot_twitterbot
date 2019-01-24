@@ -42,8 +42,8 @@ class ScreensManagerTests(unittest.TestCase):
         self.sc.update_screens_dir(self.used_screens_file)
         actual = []
         for used_screen in listdir(self.used_dir):
-            actual += used_screen
-        self.assertTrue(Counter(['0.txt', '1.txt', '2.txt']), Counter(actual))
+            actual.append(used_screen)
+        self.assertTrue(Counter(['0.txt', '1.txt', '2.txt']) == Counter(actual))
 
     def test_can_get_random_image(self):
         self.create_num_files(self.screens_dir, 3)
