@@ -5,6 +5,7 @@ Tweets random Futurama screenshots every hour. Automated using cron.
 ## Set up
   * Requires python3
   * Install required dependencies using `pip3 install -r requirements/base.txt`
+      * For development install required dependencies using `pip3 install -r requirements/dev.txt`
   * Screenshots are kept in public/screens. When a screenshot is tweeted it is moved to public/screens/used.
   * twitterbot.py requires keys and secrets from the file .env kept in the root project directory.
 

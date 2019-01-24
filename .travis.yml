@@ -3,6 +3,7 @@ branches:
         master
 
 stages:
+    - lint
     - test
 
 language: python
@@ -10,11 +11,15 @@ python:
 - '3.6'
 
 install:
-    - pip install -r requirements/base.txt
+    - pip install -r requirements/dev.txt
 
 jobs:
     include:
-        - stage: "test"
-          name: "Download screens test"
+        - stage: "lint"
+          name: "flake8"
           script:
-              - python -m unittest download_screens/test_download_screens.py
+              - flake8 .
+        - stage: "test"
+          name: "Unit Tests"
+          script:
+              - python -m unittest discover tests
