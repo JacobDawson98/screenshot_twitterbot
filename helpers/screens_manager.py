@@ -1,14 +1,16 @@
 from fire import Fire
 from dotenv import load_dotenv
-from os import path, listdir, rename, getcwd, environ
+from os import path, listdir, rename, environ, pardir
 from random import choice
 
 
 class ScreensManager(object):
 
     def __init__(self, screens_dir=None):
-        load_dotenv(path.abspath(path.join(getcwd(), '.env')))
-        self.screens_dir = screens_dir if screens_dir else path.abspath(path.join(getcwd(), 'public', 'screens'))
+        load_dotenv(path.abspath(path.join(path.dirname(__file__), '.env')))
+        self.screens_dir = screens_dir
+        if not screens_dir:
+            self.screens_dir = path.abspath(path.join(path.dirname(__file__), pardir, 'public', 'screens'))
         self.used_dir = path.abspath(path.join(self.screens_dir, 'used'))
         self.default_file = environ.get('USED_SCREENS_FILE')
 
