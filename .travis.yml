@@ -15,6 +15,7 @@ install:
 jobs:
     include:
         - stage: "test"
-          name: "Download screens test"
+          name: "Download and Sync screens test"
           script:
               - python -m unittest download_screens/test_download_screens.py
+              - python -m unittest screens_manager/test_screens_manager.py

@@ -2,7 +2,7 @@ import tweepy
 from dotenv import load_dotenv
 from os import path, environ, rename, getcwd
 
-from screens_manager import ScreensManager
+from screens_manager.screens_manager import ScreensManager
 
 
 if __name__ == '__main__':
