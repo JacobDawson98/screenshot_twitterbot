@@ -16,7 +16,7 @@ def get_download_url(season, episode, frame):
     return base_url + extension
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # flake8: noqa
     # Used for interesting print statement after all screenshots are downloaded
     time_initial = int(datetime.now().strftime('%s'))
     num_downloaded = 0

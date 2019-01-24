@@ -1,8 +1,9 @@
 import unittest
 from shutil import rmtree
 from os import path, listdir, unlink, makedirs
+from collections import Counter
 
-from .screens_manager import ScreensManager
+from helpers.screens_manager import ScreensManager
 
 
 class ScreensManagerTests(unittest.TestCase):
@@ -25,14 +26,13 @@ class ScreensManagerTests(unittest.TestCase):
 
     def test_list_consists_of_files_in_used_dir(self):
         self.create_num_files(self.used_dir, 3)
-        expected = '2.txt\n0.txt\n1.txt\n'
-        actual = ''
         self.sc.make_screens_list(self.used_screens_file)
+        actual = []
         with open(self.used_screens_file, 'r') as used_screens:
             lines = [l.strip() for l in used_screens.readlines()]
             for image_name in lines:
-                actual += image_name + '\n'
-        self.assertEqual(expected, actual)
+                actual.append(image_name)
+        self.assertTrue(Counter(['0.txt', '1.txt', '2.txt']) == Counter(actual))
 
     def test_screens_dir_syncs_with_list(self):
         with open(self.used_screens_file, 'a') as used_screens:
@@ -40,10 +40,10 @@ class ScreensManagerTests(unittest.TestCase):
                 used_screens.write(str(num) + '.txt\n')
         self.create_num_files(self.screens_dir, 3)
         self.sc.update_screens_dir(self.used_screens_file)
-        actual = ''
+        actual = []
         for used_screen in listdir(self.used_dir):
             actual += used_screen
-        self.assertEqual('2.txt0.txt1.txt', actual)
+        self.assertTrue(Counter(['0.txt', '1.txt', '2.txt']), Counter(actual))
 
     def test_can_get_random_image(self):
         self.create_num_files(self.screens_dir, 3)

@@ -10,12 +10,15 @@ python:
 - '3.6'
 
 install:
-    - pip install -r requirements/base.txt
+    - pip install -r requirements/dev.txt
 
 jobs:
     include:
+        - stage: "lint"
+          name: "flake8 linting check"
+          script:
+              - flake8 .
         - stage: "test"
           name: "Download and Sync screens test"
           script:
-              - python -m unittest download_screens/test_download_screens.py
-              - python -m unittest screens_manager/test_screens_manager.py
+              - python -m unittest discover tests
