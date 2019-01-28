@@ -8,7 +8,7 @@ from helpers.screens_manager import ScreensManager
 if __name__ == '__main__':
     load_dotenv(path.abspath(path.join(path.dirname(__file__), '.env')))
     auth = tweepy.OAuthHandler(environ.get('API_KEY'), environ.get('API_SECRET'))
-    auth.set_access_token(environ.get('OAUTH_TOKEN'), environ.get('OATUH_TOKEN_SECRET'))
+    auth.set_access_token(environ.get('OAUTH_TOKEN'), environ.get('OAUTH_TOKEN_SECRET'))
 
     sm = ScreensManager()
     image_dir = sm.get_random_image()
