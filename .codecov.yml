@@ -1,0 +1,6 @@
+flags:
+    paths:
+        - helpers/
+    tests:
+        paths:
+            - tests/
