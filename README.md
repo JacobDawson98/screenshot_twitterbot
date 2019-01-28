@@ -1,4 +1,6 @@
 # Futurama Screens
+[![Build Status](https://travis-ci.com/JacobDawson98/futurama_screens.svg?branch=master)](https://travis-ci.com/JacobDawson98/futurama_screens)
+
 
 Tweets random Futurama screenshots every hour. Automated using cron.
 
