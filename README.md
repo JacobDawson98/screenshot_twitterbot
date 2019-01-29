@@ -1,8 +1,8 @@
-# Futurama Screens
+# Screenshot Twitterbot
 [![Build Status](https://travis-ci.com/JacobDawson98/futurama_screens.svg?branch=master)](https://travis-ci.com/JacobDawson98/futurama_screens)
 
 
-Tweets random Futurama screenshots every hour. Automated using cron.
+Tweets random screenshots every hour. Automated using cron.
 
 ## Set up
   * Requires python3
@@ -22,7 +22,7 @@ USED_SCREENS_FILE=<path of used screens file relative to root project dir>
 
 ## Cron Configuration
 ```
-0 * * * * /usr/bin/python3 <path-to-projects-dir>/futurama_screens/twitterbot.py
+0 * * * * /usr/bin/python3 <path-to-projects-dir>/screenshot_twitterbot/twitterbot.py
 ```
 
 ### Image Naming
