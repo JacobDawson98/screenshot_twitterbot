@@ -1,5 +1,5 @@
 # Screenshot Twitterbot
-[![Build Status](https://travis-ci.com/JacobDawson98/futurama_screens.svg?branch=master)](https://travis-ci.com/JacobDawson98/futurama_screens)
+[![Build Status](https://travis-ci.com/JacobDawson98/screenshot_twitterbot.svg?branch=master)](https://travis-ci.com/JacobDawson98/screenshot_twitterbot)
 [![codecov](https://codecov.io/gh/JacobDawson98/screenshot_twitterbot/branch/master/graph/badge.svg)](https://codecov.io/gh/JacobDawson98/screenshot_twitterbot)
 
 
