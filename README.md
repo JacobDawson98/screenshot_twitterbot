@@ -1,5 +1,6 @@
 # Screenshot Twitterbot
 [![Build Status](https://travis-ci.com/JacobDawson98/screenshot_twitterbot.svg?branch=master)](https://travis-ci.com/JacobDawson98/screenshot_twitterbot)
+[![codecov](https://codecov.io/gh/JacobDawson98/screenshot_twitterbot/branch/master/graph/badge.svg)](https://codecov.io/gh/JacobDawson98/screenshot_twitterbot)
 
 
 Tweets random screenshots every hour. Automated using cron.
