@@ -1,5 +1,5 @@
 # Screenshot Twitterbot
-[![Build Status](https://travis-ci.com/JacobDawson98/futurama_screens.svg?branch=master)](https://travis-ci.com/JacobDawson98/futurama_screens)
+[![Build Status](https://travis-ci.com/JacobDawson98/screenshot_twitterbot.svg?branch=master)](https://travis-ci.com/JacobDawson98/screenshot_twitterbot)
 
 
 Tweets random screenshots every hour. Automated using cron.
