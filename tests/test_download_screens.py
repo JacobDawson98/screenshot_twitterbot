@@ -1,3 +1,4 @@
+from random import randint
 from contextlib import contextmanager
 from mock import patch
 from io import StringIO
@@ -35,10 +36,9 @@ class TestScreensDownloader(unittest.TestCase):
     @patch('helpers.download_screens.ScreensDownloader.get_download_url')
     @patch('helpers.download_screens.urlretrieve')
     def test_download_episodes_calls_for_all_frames(self, urlretrieve, get_download_url):
-        urlretrieve.return_value = 'oi'
         self.sd.download_episode(1, 1)
-        self.assertEqual(291, urlretrieve.call_count)
-        self.assertEqual(291, get_download_url.call_count)
+        self.assertEqual(self.sd.frames_per_episode - 1, urlretrieve.call_count)
+        self.assertEqual(self.sd.frames_per_episode - 1, get_download_url.call_count)
 
     @patch('helpers.download_screens.urlretrieve')
     def test_download_episodes_handles_exception(self, urlretrieve):
@@ -46,5 +46,30 @@ class TestScreensDownloader(unittest.TestCase):
         with self.captured_output() as (out, err):
             self.sd.download_episode(1, 1)
         output = out.getvalue().strip().splitlines()
-        self.assertEqual('Couldn\'t download from: {}'.format(self.sd.get_download_url(1, 1, 291)),
-                         output[len(output) - 1])
+        for error_index in range(2, len(output), 2):
+            self.assertEqual('Couldn\'t download from: {}'
+                             .format(self.sd.get_download_url(1, 1, round(error_index / 2))),
+                             output[error_index])
+
+    @patch('helpers.download_screens.urlretrieve')
+    @patch('helpers.download_screens.ScreensDownloader.download_episode')
+    def test_download_season_calls_correct_amount_num_episodes(self, download_episode, urlretrieve):
+        season = randint(1, max(self.sd.num_episodes.keys()))
+        self.sd.download_season(season)
+        self.assertEqual(self.sd.num_episodes[season], download_episode.call_count)
+
+    @patch('helpers.download_screens.urlretrieve')
+    def test_do_not_use_unavailable_season(self, urlretrieve):
+        with self.assertRaises(KeyError):
+            self.sd.download_season(max(self.sd.num_episodes.keys()) + randint(1, 100))
+
+    @patch('helpers.download_screens.ScreensDownloader.download_season')
+    @patch('helpers.download_screens.urlretrieve')
+    def test_download_all_episodes_calls_all_seasons(self, urlretrieve, download_season):
+        self.sd.download_all_episodes()
+        self.assertEqual(max(self.sd.num_episodes.keys()), download_season.call_count)
+
+    @patch('helpers.download_screens.urlretrieve')
+    def test_download_all_episodes_downloads_all_episodes(self, urlretrieve):
+        self.sd.download_all_episodes()
+        self.assertEqual(sum(self.sd.num_episodes.values()) * (self.sd.frames_per_episode - 1), urlretrieve.call_count)
