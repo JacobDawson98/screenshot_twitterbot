@@ -2,3 +2,4 @@
 *.pyc
 public/*
 .DS_Store
+used_screens.txt

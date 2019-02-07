@@ -18,13 +18,16 @@ API_KEY=<api key>
 API_SECRET=<api secret>
 OAUTH_TOKEN=<oauth token>
 OAUTH_TOKEN_SECRET=<oauth token secret>
+```
+## Optional .env vars
+```
+PASTEBIN_KEY=<pastebin dev key>
+PASTEBIN_USER_KEY=<pastebin user key>
 USED_SCREENS_FILE=<path of used screens file relative to root project dir>
 ```
-
 ## Cron Configuration
 ```
 0 * * * * /usr/bin/python3 <path-to-projects-dir>/screenshot_twitterbot/twitterbot.py
 ```
-
 ### Image Naming
   * Image names are formatted as `{season}_{episode}_{frame}`
