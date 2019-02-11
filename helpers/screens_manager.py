@@ -7,18 +7,20 @@ from random import choice
 class ScreensManager(object):
 
     def __init__(self, screens_dir=None):
-        load_dotenv(path.abspath(path.join(path.dirname(__file__), '.env')))
+        load_dotenv()
         self.screens_dir = screens_dir
         if not screens_dir:
             self.screens_dir = path.abspath(path.join(path.dirname(__file__), pardir, 'public', 'screens'))
         self.used_dir = path.abspath(path.join(self.screens_dir, 'used'))
-        self.default_file = environ.get('USED_SCREENS_FILE')
+        self.project_dir = path.abspath(path.join(path.dirname(__file__), '..'))
+        if environ.get('USED_SCREENS_FILE'):
+            self.default_file = path.abspath(path.join(self.project_dir, environ.get('USED_SCREENS_FILE')))
 
-    def make_screens_list(self, used_screens_file=None):
-        with open(used_screens_file if used_screens_file else self.default_file, 'a') as used_screens:
+    def make_screens_list(self, screens_file=None):
+        with open(screens_file if screens_file else self.default_file, 'a') as used:
             for f in listdir(self.used_dir):
                 if path.isfile(path.join(self.used_dir, f)):
-                    used_screens.write(f + '\n')
+                    used.write(f + '\n')
 
     def update_screens_dir(self, used_screens_file=None, screens_dir=None):
         with open(used_screens_file if used_screens_file else self.default_file) as used_screens:

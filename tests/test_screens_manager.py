@@ -1,3 +1,4 @@
+from mock import patch
 import unittest
 from shutil import rmtree
 from os import path, listdir, unlink, makedirs
@@ -9,7 +10,8 @@ from helpers.screens_manager import ScreensManager
 class ScreensManagerTests(unittest.TestCase):
 
     def setUp(self):
-        self.screens_dir = path.abspath(path.join(path.dirname(path.realpath(__file__)), 'screens'))
+        self.project_dir = path.abspath(path.join(path.dirname(__file__), '..'))
+        self.screens_dir = path.abspath(path.join(self.project_dir, 'screens'))
         self.used_dir = path.abspath(path.join(self.screens_dir, 'used'))
         makedirs(self.used_dir)
         self.used_screens_file = path.abspath(path.join(path.dirname(path.realpath(__file__)), 'used_screens.txt'))
@@ -17,12 +19,21 @@ class ScreensManagerTests(unittest.TestCase):
 
     def tearDown(self):
         rmtree(self.screens_dir)
-        unlink(self.used_screens_file)
+        try:
+            unlink(self.used_screens_file)
+        except FileNotFoundError:
+            pass
 
     def create_num_files(self, directory, num_files):
         for num in range(num_files):
             with open(path.join(directory, str(num) + '.txt'), 'w'):
                 pass
+
+    @patch('builtins.open')
+    def test_make_screens_list_opens_specified_dir(self, file_open):
+        test_file_dir = path.abspath(path.join(self.project_dir, 'test.txt'))
+        self.sc.make_screens_list(test_file_dir)
+        file_open.assert_called_with(test_file_dir, 'a')
 
     def test_list_consists_of_files_in_used_dir(self):
         self.create_num_files(self.used_dir, 3)
