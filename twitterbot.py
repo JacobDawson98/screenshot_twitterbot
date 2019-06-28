@@ -13,16 +13,10 @@ if __name__ == '__main__':
     auth.set_access_token(environ.get('OAUTH_TOKEN'), environ.get('OAUTH_TOKEN_SECRET'))
 
     sm = ScreensManager()
-    image_dir = sm.get_random_image()
+    image_dir = sm.get_random_image_dir()
     tweepy.API(auth).update_with_media(image_dir)
     image_name = image_dir.rsplit('/', 1)[-1]
-    new_image_dir = path.abspath(
-            path.join(
-                path.dirname(__file__),
-                'public',
-                'screens',
-                'used',
-                image_name))
+    new_image_dir = sm.get_new_used_location(image_name)
     rename(image_dir, new_image_dir)
     if path.isfile(path.join(path.dirname(__file__), environ.get('USED_SCREENS_FILE'))):
         with open(environ.get('USED_SCREENS_FILE'), 'a') as used_screens:
