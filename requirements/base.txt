@@ -1,7 +1,7 @@
 certifi==2018.11.29
 chardet==3.0.4
 idna==2.8
-numpy==1.15.4
+numpy==1.22.0
 oauthlib==2.1.0
 opencv-python==3.4.4.19
 PySocks==1.6.8
